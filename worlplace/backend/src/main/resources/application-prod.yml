@@ -1,0 +1,107 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+    accept-count: 100
+    max-connections: 10000
+
+spring:
+  application:
+    name: smart-pet-system
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/smart_pet_system?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: petadmin
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
+
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
+    database: 0
+    timeout: 3000
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+      shutdown-timeout: 100ms
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+      file-size-threshold: 0
+
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      write-dates-as-timestamps: false
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.pet.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    lazy-loading-enabled: true
+    multiple-result-sets-enabled: true
+    use-column-label: true
+    use-generated-keys: true
+    default-executor-type: REUSE
+    default-statement-timeout: 25000
+    log-impl: org.apache.ibatis.logging.nolog.NoLoggingImpl
+  global-config:
+    db-config:
+      id-type: AUTO
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 86400000
+  header: Authorization
+  prefix: Bearer
+
+logging:
+  level:
+    root: INFO
+    com.pet: INFO
+    org.springframework: WARN
+    com.baomidou.mybatisplus: WARN
+  file:
+    name: /var/log/smart-pet-system/application.log
+    max-size: 100MB
+    max-history: 30
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    export:
+      simple:
+        enabled: true

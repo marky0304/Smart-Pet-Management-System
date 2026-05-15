@@ -1,0 +1,87 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: smart-pet-system
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+  
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/smart_pet_system?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: ${DB_PASSWORD:123456}
+  
+  # Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    password: 
+    database: 0
+    timeout: 3000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  
+  # 文件上传配置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 20MB
+  
+  # Jackson配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+
+# MyBatis Plus配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+  mapper-locations: classpath*:/mapper/**/*.xml
+
+# JWT配置
+jwt:
+  secret: ${JWT_SECRET:change-me-in-production}
+  expiration: 604800000  # 7天（毫秒）
+  header: Authorization
+  prefix: Bearer 
+
+# 文件上传配置
+file:
+  upload:
+    path: ./uploads/
+    url: http://localhost:8080/api/uploads/
+
+# LLM配置（Anthropic兼容格式，支持 DeepSeek Anthropic）
+llm:
+  api-url: ${ANTHROPIC_BASE_URL:https://api.deepseek.com/anthropic}
+  api-key: ${ANTHROPIC_AUTH_TOKEN:${LLM_API_KEY:your-api-key-here}}
+  model: ${ANTHROPIC_MODEL:DeepSeek-V4-pro}
+  max-tokens: 1000
+  temperature: 0.7
+  connect-timeout: 30
+  read-timeout: 60
+
+# 日志配置
+logging:
+  level:
+    com.pet: debug
+    org.springframework: info
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n'

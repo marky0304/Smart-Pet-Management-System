@@ -1,0 +1,235 @@
+/* PetCare 治愈系主题 - 全局样式 */
+
+:root {
+  /* ===== 品牌主色调（温暖蓝） ===== */
+  --brand-primary:        #5C8AEB;
+  --brand-primary-hover:  #4A78D6;
+  --brand-primary-light:  rgba(92, 138, 235, 0.08);
+  --brand-primary-shadow: rgba(92, 138, 235, 0.25);
+
+  /* ===== 四卡片功能色 ===== */
+  --color-pet:        #E8817A;
+  --color-pet-bg:     #FFF5F3;
+  --color-health:     #4DA88A;
+  --color-health-bg:  #F2FAF6;
+  --color-apt:        #ED7B4A;
+  --color-apt-bg:     #FFF6F0;
+  --color-community:  #5A9FC6;
+  --color-community-bg: #F3F8FC;
+
+  /* ===== 中性色 ===== */
+  --page-bg:          #FBF9F7;
+  --card-bg:          #FFFFFF;
+  --text-primary:     #1A1A1A;
+  --text-secondary:   #8C8C8C;
+  --text-muted:       #B0B0B0;
+  --border-color:     #EEEEEE;
+  --border-light:     #F3F4F6;
+
+  /* ===== 功能色 ===== */
+  --success-color:    #10B981;
+  --warning-color:    #F59E0B;
+  --danger-color:     #EF4444;
+  --info-color:       #5C8AEB;
+
+  /* ===== 阴影 ===== */
+  --shadow-xs:  0 1px 4px rgba(0, 0, 0, 0.03);
+  --shadow-sm:  0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md:  0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg:  0 8px 28px rgba(0, 0, 0, 0.08);
+  --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.10);
+
+  /* ===== 圆角 ===== */
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  20px;
+  --radius-xl:  28px;
+  --radius-full: 999px;
+
+  /* ===== 间距 ===== */
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  16px;
+  --spacing-lg:  24px;
+  --spacing-xl:  32px;
+  --spacing-2xl: 48px;
+
+  /* ===== 过渡 ===== */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+}
+
+/* ===== 全局重置 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+               "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--page-bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== 通用页面容器 ===== */
+.page-container {
+  padding: 24px;
+  background: var(--page-bg);
+  min-height: 100vh;
+}
+
+.page-header {
+  margin-bottom: 24px;
+}
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+  letter-spacing: -0.3px;
+}
+.page-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ===== 通用卡片 ===== */
+.pet-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  transition: box-shadow var(--transition-base);
+}
+.pet-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* ===== 品牌按钮 ===== */
+.btn-brand {
+  background: var(--brand-primary) !important;
+  border: none !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  transition: all var(--transition-base) !important;
+}
+.btn-brand:hover {
+  background: var(--brand-primary-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px var(--brand-primary-shadow) !important;
+}
+
+/* ===== Element Plus 全局覆盖 ===== */
+.el-button--primary {
+  --el-button-bg-color: var(--brand-primary);
+  --el-button-border-color: var(--brand-primary);
+  --el-button-hover-bg-color: var(--brand-primary-hover);
+  --el-button-hover-border-color: var(--brand-primary-hover);
+  --el-button-active-bg-color: var(--brand-primary-hover);
+  --el-button-active-border-color: var(--brand-primary-hover);
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.el-input__wrapper {
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px var(--border-color) inset;
+  transition: all var(--transition-base);
+}
+.el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--brand-primary) inset;
+}
+.el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 2px var(--brand-primary-shadow) inset;
+}
+
+.el-table {
+  --el-table-border-color: var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.el-table th.el-table__cell {
+  background: #FAFAFA;
+  color: var(--text-primary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-light);
+}
+.el-table tr {
+  transition: background var(--transition-fast);
+}
+.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+  background: #FAFBFC;
+}
+
+.el-pagination .el-pager li.is-active {
+  background: var(--brand-primary);
+  border-radius: 8px;
+}
+
+.el-tag {
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.el-dialog {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+}
+.el-dialog__header {
+  border-bottom: 1px solid var(--border-light);
+  padding: 20px 24px;
+  margin: 0;
+}
+.el-dialog__title {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.el-tabs__item.is-active {
+  color: var(--brand-primary);
+  font-weight: 600;
+}
+.el-tabs__active-bar {
+  background: var(--brand-primary);
+}
+
+.el-dropdown-menu {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.el-message {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.el-radio__input.is-checked .el-radio__inner {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+.el-radio__input.is-checked + .el-radio__label {
+  color: var(--brand-primary);
+}
+
+.el-checkbox__input.is-checked .el-checkbox__inner {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.el-empty__description p {
+  color: var(--text-secondary);
+}
+
+.el-backtop {
+  background: var(--brand-primary);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+}
